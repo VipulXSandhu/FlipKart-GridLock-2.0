@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AI-ParkSense: Intelligent Parking Hotspot Detection and Congestion Impact Analysis Dashboard for traffic authorities." />
+    <title>AI-ParkSense | Traffic Intelligence Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <style>
+      /* ─── Splash Screen ─────────────────────────────────────── */
+      #splash-screen {
+        position: fixed;
+        inset: 0;
+        background-color: #0a0f1a;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: opacity 0.5s ease-out;
+      }
+      .splash-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+      }
+      .splash-logo {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        animation: float 3s ease-in-out infinite, criticalPulse 2s ease-in-out infinite;
+      }
+      .splash-text {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        background: linear-gradient(135deg, #3b82f6, #8b5cf6, #14b8a6);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: fadeIn 1s ease-out;
+      }
+      .loader-line {
+        width: 200px;
+        height: 4px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 2px;
+        overflow: hidden;
+        position: relative;
+      }
+      .loader-line::after {
+        content: '';
+        position: absolute;
+        left: -50%;
+        top: 0;
+        height: 100%;
+        width: 50%;
+        background: linear-gradient(90deg, transparent, #3b82f6, #8b5cf6, transparent);
+        animation: slide 1.5s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+      @keyframes slide {
+        0% { left: -50%; }
+        100% { left: 150%; }
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes criticalPulse {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+        50% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+      <div class="splash-content">
+        <img src="/favicon.svg" alt="Logo" class="splash-logo pulse-critical" />
+        <h2 class="splash-text">AI-ParkSense</h2>
+        <div class="loader-line"></div>
+      </div>
+    </div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          const splash = document.getElementById('splash-screen');
+          if (splash) {
+            splash.style.opacity = '0';
+            setTimeout(() => splash.remove(), 500);
+          }
+        }, 800); // minimum showing time for effect
+      });
+    </script>
+  </body>
+</html>
