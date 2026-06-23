@@ -2,7 +2,7 @@ import axios from 'axios';
 import type { AnalysisResponse, SamplesResponse, HealthResponse, DatasetSummary, HistoryResponse } from '../types';
 
 const api = axios.create({
-  baseURL: '',
+  baseURL: import.meta.env.VITE_API_URL || '',
   timeout: 120_000, // YOLO inference can take time on first run
 });
 
